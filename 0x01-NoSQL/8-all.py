@@ -2,7 +2,8 @@
 """a Python function that
 lists all documents in a collection"""
 from typing import List, Dict
-from pymongo.collection import Collection  # Import Collection from pymongo
+from pymongo.collection import Collection
+
 
 def list_all(mongo_collection: Collection) -> List[Dict[str, any]]:
     """
@@ -16,4 +17,3 @@ def list_all(mongo_collection: Collection) -> List[Dict[str, any]]:
         Empty list if no documents found.
     """
     return list(mongo_collection.find())
-
