@@ -1,21 +1,16 @@
-#!/usr/bin/env python3
-"""a Python function that
-lists all documents in a collection"""
 from typing import List, Dict
-from pymongo import MongoClient
+from pymongo.collection import Collection  # Import Collection from pymongo
 
-
-def list_all(mongo_collection: MongoClient[Dict[str, any]]) -> List:
-    """Functionto list documents from a collection
+def list_all(mongo_collection: Collection) -> List[Dict[str, any]]:
+    """
+    Function to list all documents from a MongoDB collection.
 
     Args:
-        mongo_collection (pymongo): A mongo object
+        mongo_collection (Collection): A pymongo Collection object.
 
-    Return:
-        documents in mongo_collections
-        [] if empty
+    Returns:
+        List of documents in the collection.
+        Empty list if no documents found.
     """
-    log = mongo_collection.find()
-    if log:
-        return log
-    return []
+    return list(mongo_collection.find())
+
