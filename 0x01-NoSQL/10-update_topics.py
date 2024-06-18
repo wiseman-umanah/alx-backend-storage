@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """a Python function that changes all
 topics of a school document based on the name"""
-from typing import Dict, Any, List
-from pymongo import MongoClient
+import pymongo
 
 
-def update_topics(mongo_collection: MongoClient[Dict[str, any]], name: str, topics: List[str]):
+def update_topics(mongo_collection, name, topics):
     """Function to insert documents to a collection
 
     Args:

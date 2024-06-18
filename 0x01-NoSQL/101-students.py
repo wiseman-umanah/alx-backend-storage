@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """a Python function that
 insert document in a collection"""
-from typing import Dict, List
-from pymongo import MongoClient
+import pymongo
 
 
-def top_students(mongo_collection: MongoClient[Dict[str, any]]) -> List:
+def top_students(mongo_collection):
     """Function to insert documents to a collection
 
     Args:
@@ -19,5 +18,4 @@ def top_students(mongo_collection: MongoClient[Dict[str, any]]) -> List:
         {"$project": {"_id": 0, "name": "$_id", "averageScore": 1}},
         {"$sort": {"averageScore": -1}}
         ])
-
 

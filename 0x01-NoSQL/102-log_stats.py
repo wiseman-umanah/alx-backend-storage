@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """ a Python script that provides some stats
 about Nginx logs stored in MongoDB"""
-from typing import List, Dict
-from pymongo import MongoClient
+import pymongo
 
 
-def main(mongo_collection: MongoClient[Dict[str, any]]):
+def main(mongo_collection):
     """ Function that provides some stats
     about Nginx logs stored in MongoDB
 
@@ -30,6 +29,6 @@ def main(mongo_collection: MongoClient[Dict[str, any]]):
 
 
 if __name__ == "__main__":
-    client = MongoClient('mongodb://127.0.0.1:27017')
+    client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
     nginx_collection = client.my_db.nginx
     main(nginx_collection)
