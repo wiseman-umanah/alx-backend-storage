@@ -16,10 +16,11 @@ def main(mongo_collection):
     print("{} logs".format(mongo_collection.count_documents({})))
     print("Methods:")
     for i in method:
-        print(f"\tmethod {i}: {mongo_collection.count_documents(
-            {"method": i})}")
-    print(mongo_collection.count_documents({"path": "/status"},
-                                           {"method": "GET"}), "status check")
+        print("\tmethod {}: {}".format(i, mongo_collection.count_documents(
+            {'method': i})))
+    status = mongo_collection.count_documents(
+        {"method": "GET", "path": "/status"})
+    print("{} status check".format(status))
 
 
 if __name__ == "__main__":
