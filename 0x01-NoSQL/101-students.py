@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
-"""a Python function that
-insert document in a collection"""
-import pymongo
+"""
+Get top students from average
+"""
 
 
 def top_students(mongo_collection):
-    """Function to insert documents to a collection
-
-    Args:
-        mongo_collection (pymongo): A mongo object
-    Return:
-        students with average from peak to lowest
-    """
+    """ students by score """
     return mongo_collection.aggregate([
         {
             "$project":

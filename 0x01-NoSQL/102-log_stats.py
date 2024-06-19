@@ -12,16 +12,22 @@ def main(mongo_collection):
         mongo_collection (pymongo): A mongo object
 
     """
-    method = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    print("{} logs".format(mongo_collection.count_documents({})))
+    client = pymongo.MongoClient()
+    collec_nginx = client.logs.nginx
+
+    num_of_docs = collec_nginx.count_documents({})
+    print("{} logs".format(num_of_docs))
     print("Methods:")
-    for i in method:
-        print("\tmethod {}: {}".format(i, mongo_collection.count_documents(
-            {'method': i})))
-    status = mongo_collection.count_documents(
-        {"method": "GET", "path": "/status"})
+    methods_list = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    for method in methods_list:
+        method_count = collec_nginx.count_documents({"method": method})
+        print("\tmethod {}: {}".format(method, method_count))
+    status = collec_nginx.count_documents({"method": "GET", "path": "/status"})
     print("{} status check".format(status))
-    top_ips = mongo_collection.aggregate([
+
+    print("IPs:")
+
+    top_IPs = collec_nginx.aggregate([
         {"$group":
          {
              "_id": "$ip",
@@ -36,12 +42,11 @@ def main(mongo_collection):
             "count": 1
         }}
     ])
-    print("IPs:")
-    for t in top_ips:
-        print(f"\t{t.get('ip')}: {t.get('count')}")
+    for top_ip in top_IPs:
+        count = top_ip.get("count")
+        ip_address = top_ip.get("ip")
+        print("\t{}: {}".format(ip_address, count))
 
 
 if __name__ == "__main__":
-    client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
-    nginx_collection = client.logs.nginx
-    main(nginx_collection)
+    main()
