@@ -3,7 +3,7 @@
 working with Redis in python"""
 import redis
 import uuid
-from typing import Union, Callable, Any
+from typing import Union, Callable, Optional
 from functools import wraps
 
 
@@ -77,7 +77,7 @@ class Cache:
         (self._redis).mset({key: data})
         return key
 
-    def get(self, key: str, fn: Callable[[Any], Any]
+    def get(self, key: str, fn: Optional[Callable]
             = None) -> Union[str, bytes, float, int]:
         """Gets a key and converts it based on fn datatype
 
