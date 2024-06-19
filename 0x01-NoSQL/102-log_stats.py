@@ -31,5 +31,5 @@ def main(mongo_collection):
 
 if __name__ == "__main__":
     client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
-    nginx_collection = client.my_db.nginx
+    nginx_collection = client.logs.nginx
     main(nginx_collection)
