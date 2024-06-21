@@ -64,7 +64,7 @@ class Cache:
 
     @call_history
     @count_calls
-    def store(self, data: Union[str, bytes, float, int]) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """Stores a new data to Redis
 
         Args:
